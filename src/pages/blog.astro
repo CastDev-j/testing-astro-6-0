@@ -29,6 +29,7 @@ const pageTitle = "Blog";
               src={post.frontmatter.image.url}
               alt={post.frontmatter.title}
               class="w-full h-auto rounded-lg"
+              loading="lazy"
             />
             <h2 class="text-2xl font-semibold">{post.frontmatter.title}</h2>
             <p class="text-gray-500 text-sm">

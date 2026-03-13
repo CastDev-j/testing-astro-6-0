@@ -9,6 +9,7 @@ interface Props extends Post {}
     src={Astro.props.image.url}
     alt={Astro.props.image.alt}
     class="w-full h-auto rounded-lg"
+    loading="lazy"
   />
   <p class="text-gray-500 text-sm self-start">
     By {Astro.props.author} on {
