@@ -1,8 +1,29 @@
 ---
-import Home from "@components/Home.astro";
 import Layout from "@layout/Layout.astro";
+
+const pageTitle = "Home";
 ---
 
-<Layout title="Home">
-  <Home title="Home Page" />
+<Layout title={pageTitle}>
+  <section class="max-w-5xl px-4 py-8">
+    <article class="w-full flex flex-col items-center gap-6">
+      <h1 class="text-2xl">{pageTitle}</h1>
+      <div class="counter">00:00:00 AM</div>
+
+      <p>
+        This is the homepage of my Astro site. I'm still working through the
+        tutorial, but I'm excited to see how it turns out!
+      </p>
+    </article>
+  </section>
 </Layout>
+
+<script>
+  const counter = document.querySelector(".counter") as HTMLDivElement;
+
+  counter.textContent = new Date().toLocaleTimeString();
+
+  setInterval(() => {
+    counter.textContent = new Date().toLocaleTimeString();
+  }, 1000);
+</script>
