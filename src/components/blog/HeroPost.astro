@@ -4,24 +4,42 @@ import type { Post } from "@interfaces/post";
 interface Props extends Post {}
 ---
 
-<article class="max-w-5xl w-full p-4 flex flex-col gap-2 items-center">
+<article class="max-w-5xl w-full py-4 flex flex-col gap-2 items-center">
+  <a
+    href="/blog"
+    class="self-start text-indigo-600 px-2 py-3 hover:text-indigo-800 text-sm flex items-center gap-2 transition-colors duration-200 font-medium group"
+    aria-label="Go back to blog"
+  >
+    &#x276E; Go back to blog
+  </a>
+
   <img
     src={Astro.props.image.url}
     alt={Astro.props.image.alt}
     class="w-full h-auto rounded-lg"
     loading="lazy"
+    transition:name={Astro.props.title + "1"}
   />
-  <p class="text-gray-500 text-sm self-start">
+  <p
+    class="text-gray-500 text-sm self-start"
+    transition:name={Astro.props.title + "3"}
+  >
     By {Astro.props.author} on {
       new Date(Astro.props.pubDate).toLocaleDateString()
     }
   </p>
-  <h1 class="text-3xl font-bold">{Astro.props.title}</h1>
-  <p>{Astro.props.description}</p>
+  <h1 class="text-3xl font-bold" transition:name={Astro.props.title + "2"}>
+    {Astro.props.title}
+  </h1>
+  <p>
+    {Astro.props.description}
+  </p>
   <ul class="flex gap-2 my-2 self-start">
     {
       Astro.props.tags.map((tag) => (
-        <li class="px-2 py-1 bg-gray-200 rounded">{tag}</li>
+        <li class="px-2 py-1 bg-gray-200 rounded" transition:name={tag}>
+          {tag}
+        </li>
       ))
     }
   </ul>
