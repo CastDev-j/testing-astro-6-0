@@ -1,0 +1,149 @@
+---
+import HeroPost from "@components/blog/HeroPost.astro";
+import Layout from "./Layout.astro";
+
+interface Props {
+  frontmatter: {
+    title: string;
+    pubDate: string;
+    description: string;
+    author: string;
+    image: {
+      url: string;
+      alt: string;
+    };
+    tags: string[];
+  };
+}
+
+const { frontmatter } = Astro.props;
+---
+
+<Layout title={frontmatter.title}>
+  <HeroPost {...frontmatter} />
+  <div
+    class="post-content min-h-48 flex flex-col items-start max-w-5xl w-full px-4 py-8"
+  >
+    <slot />
+  </div>
+</Layout>
+
+<style>
+  .post-content :global(h1),
+  .post-content :global(h2),
+  .post-content :global(h3),
+  .post-content :global(h4),
+  .post-content :global(h5),
+  .post-content :global(h6) {
+    font-weight: bold;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+  }
+  .post-content :global(h1) {
+    font-size: 2.25rem;
+    line-height: 2.5rem;
+  }
+  .post-content :global(h2) {
+    font-size: 1.875rem;
+    line-height: 2.25rem;
+  }
+  .post-content :global(h3) {
+    font-size: 1.5rem;
+    line-height: 2rem;
+  }
+  .post-content :global(h4) {
+    font-size: 1.25rem;
+    line-height: 1.75rem;
+  }
+  .post-content :global(h5) {
+    font-size: 1.125rem;
+    line-height: 1.75rem;
+  }
+  .post-content :global(h6) {
+    font-size: 1rem;
+    line-height: 1.5rem;
+  }
+
+  .post-content :global(p) {
+    margin-bottom: 1rem;
+    line-height: 1.625;
+  }
+
+  .post-content :global(ul) {
+    list-style-type: disc;
+    padding-left: 1.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .post-content :global(ol) {
+    list-style-type: decimal;
+    padding-left: 1.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .post-content :global(li) {
+    margin-bottom: 0.5rem;
+  }
+
+  .post-content :global(a) {
+    color: #2563eb;
+    text-decoration: underline;
+    transition: color 0.2s;
+  }
+  .post-content :global(a:hover) {
+    color: #1e40af;
+  }
+
+  .post-content :global(blockquote) {
+    border-left: 4px solid #d1d5db;
+    padding-left: 1rem;
+    font-style: italic;
+    color: #4b5563;
+    margin-bottom: 1rem;
+  }
+
+  .post-content :global(pre) {
+    background: #111827;
+    color: #f3f4f6;
+    border-radius: 0.5rem;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    overflow-x: auto;
+  }
+
+  .post-content :global(code) {
+    background: #f3f4f6;
+    color: #db2777;
+    border-radius: 0.25rem;
+    padding: 0.125rem 0.25rem;
+    font-family: monospace;
+    font-size: 0.875rem;
+  }
+
+  .post-content :global(img) {
+    margin-top: 1.5rem;
+    margin-bottom: 1.5rem;
+    border-radius: 0.5rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    max-width: 100%;
+    height: auto;
+  }
+
+  .post-content :global(table) {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .post-content :global(th),
+  .post-content :global(td) {
+    border: 1px solid #e5e7eb;
+    padding: 0.5rem 1rem;
+  }
+
+  .post-content :global(th) {
+    background: #f3f4f6;
+    font-weight: 600;
+  }
+</style>

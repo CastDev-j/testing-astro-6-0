@@ -1,35 +1,43 @@
 ---
+import type { Post } from "@interfaces/post";
 import Layout from "@layout/Layout.astro";
+
+const allPosts = Object.values(
+  import.meta.glob("./posts/*.md", { eager: true }),
+) as {
+  url: string;
+  frontmatter: Post;
+}[];
+
+const pageTitle = "Blog";
 ---
 
-<Layout title="Home">
-  <section class="max-w-5xl px-4 py-8 flex flex-col items-center gap-6">
-    <ul class="flex justify-center w-full gap-6">
-      <li>
-        <a
-          class="px-4 py-2 bg-indigo-50 hover:bg-indigo-100 transition-colors"
-          href="/posts/post-1">Post 1</a
-        >
-      </li>
-      <li>
-        <a
-          class="px-4 py-2 bg-indigo-50 hover:bg-indigo-100 transition-colors"
-          href="/posts/post-2">Post 2</a
-        >
-      </li>
-      <li>
-        <a
-          class="px-4 py-2 bg-indigo-50 hover:bg-indigo-100 transition-colors"
-          href="/posts/post-3">Post 3</a
-        >
-      </li>
-    </ul>
+<Layout title={pageTitle}>
+  <section class="max-w-5xl w-full p-4">
+    <h1 class="text-2xl font-bold">{pageTitle}</h1>
+  </section>
 
-    <article class="w-full flex flex-col items-center gap-6">
-      <p>
-        This is the homepage of my Astro site. I'm still working through the
-        tutorial, but I'm excited to see how it turns out!
-      </p>
+  <section class="w-full p-4 flex flex-col items-stretch justify-between">
+    <article class="flex justify-between w-full gap-6 flex-wrap">
+      {
+        allPosts.map((post) => (
+          <a
+            class="w-full max-w-2xs flex flex-col items-center gap-4 outline-2 outline-offset-8 outline-current/20 rounded-sm hover:outline-indigo-500 transition-all"
+            href={post.url}
+          >
+            <img
+              src={post.frontmatter.image.url}
+              alt={post.frontmatter.title}
+              class="w-full h-auto rounded-lg"
+            />
+            <h2 class="text-2xl font-semibold">{post.frontmatter.title}</h2>
+            <p class="text-gray-500 text-sm">
+              By {post.frontmatter.author} on{" "}
+              {new Date(post.frontmatter.pubDate).toLocaleDateString()}
+            </p>
+          </a>
+        ))
+      }
     </article>
   </section>
 </Layout>

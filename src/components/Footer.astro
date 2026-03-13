@@ -1,0 +1,14 @@
+---
+import { socials } from "src/config";
+import Social from "./Social.astro";
+---
+
+<footer class="mt-auto w-full">
+  <p class="text-center text-sm text-gray-500 py-4">
+    &copy; {new Date().getFullYear()} Testing Astro. All rights reserved.
+  </p>
+
+  <ul class="flex justify-center gap-4 mb-4">
+    {socials.map((social) => <Social href={social.href} name={social.name} />)}
+  </ul>
+</footer>

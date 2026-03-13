@@ -1,0 +1,27 @@
+---
+import type { Post } from "@interfaces/post";
+
+interface Props extends Post {}
+---
+
+<article class="max-w-5xl w-full p-4 flex flex-col gap-2 items-center">
+  <img
+    src={Astro.props.image.url}
+    alt={Astro.props.image.alt}
+    class="w-full h-auto rounded-lg"
+  />
+  <p class="text-gray-500 text-sm self-start">
+    By {Astro.props.author} on {
+      new Date(Astro.props.pubDate).toLocaleDateString()
+    }
+  </p>
+  <h1 class="text-3xl font-bold">{Astro.props.title}</h1>
+  <p>{Astro.props.description}</p>
+  <ul class="flex gap-2 my-2 self-start">
+    {
+      Astro.props.tags.map((tag) => (
+        <li class="px-2 py-1 bg-gray-200 rounded">{tag}</li>
+      ))
+    }
+  </ul>
+</article>
