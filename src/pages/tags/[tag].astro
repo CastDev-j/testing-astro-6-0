@@ -11,7 +11,7 @@ export async function getStaticPaths() {
   const tags = [...new Set(posts.flatMap((p) => p.frontmatter.tags))];
 
   return tags.map((tag) => ({
-    params: { tag },
+    params: { tag: tag.replace(/\s+/g, "-").toLowerCase() },
     props: {
       posts: posts.filter((post) => post.frontmatter.tags.includes(tag)),
     },

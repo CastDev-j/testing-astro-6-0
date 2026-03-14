@@ -39,7 +39,10 @@ const { title, pubDate, description, author, image, tags } = Astro.props;
     {
       tags.map((tag) => (
         <li>
-          <a href={`/tags/${tag}`} class="px-2 py-1 bg-gray-200 rounded">
+          <a
+            href={`/tags/${tag.replace(/\s+/g, "-").toLowerCase()}`}
+            class="px-2 py-1 bg-gray-200 rounded"
+          >
             {tag}
           </a>
         </li>
