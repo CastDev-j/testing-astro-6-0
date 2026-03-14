@@ -10,7 +10,7 @@ const { post } = Astro.props;
 ---
 
 <a
-  class="w-full max-w-max md:max-w-2xs flex flex-col items-center gap-4 outline-2 outline-offset-8 outline-current/20 rounded-sm hover:outline-indigo-500 transition-all"
+  class="w-full max-w-max md:max-w-2xs flex flex-col items-center outline-2 outline-current/20 rounded-b-sm hover:outline-indigo-500 transition-all"
   href={post.url}
 >
   <Image
@@ -18,21 +18,24 @@ const { post } = Astro.props;
     alt={post.frontmatter.title}
     width="800"
     height="450"
-    class="w-full h-auto rounded-lg"
+    class="w-full h-auto"
     loading="lazy"
     transition:name={post.frontmatter.title + "1"}
   />
-  <h2
-    class="text-2xl font-semibold"
-    transition:name={post.frontmatter.title + "2"}
-  >
-    {post.frontmatter.title}
-  </h2>
-  <p
-    class="text-gray-500 text-sm"
-    transition:name={post.frontmatter.title + "3"}
-  >
-    By {post.frontmatter.author} on{" "}
-    {new Date(post.frontmatter.pubDate).toLocaleDateString()}
-  </p>
+
+  <div class="p-4 flex flex-col items-start gap-2">
+    <h2
+      class="text-2xl font-semibold"
+      transition:name={post.frontmatter.title + "2"}
+    >
+      {post.frontmatter.title}
+    </h2>
+    <p
+      class="text-gray-500 text-sm"
+      transition:name={post.frontmatter.title + "3"}
+    >
+      By {post.frontmatter.author} on{" "}
+      {new Date(post.frontmatter.pubDate).toLocaleDateString()}
+    </p>
+  </div>
 </a>
