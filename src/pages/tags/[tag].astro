@@ -13,15 +13,13 @@ export async function getStaticPaths() {
   return tags.map((tag) => ({
     params: { tag },
     props: {
-      filteredPosts: posts.filter((post) =>
-        post.frontmatter.tags.includes(tag),
-      ),
+      posts: posts.filter((post) => post.frontmatter.tags.includes(tag)),
     },
   }));
 }
 
 const { tag } = Astro.params;
-const { filteredPosts } = Astro.props;
+const { posts } = Astro.props;
 
 const pageTitle = "Posts by Tag - " + tag;
 ---
@@ -35,7 +33,7 @@ const pageTitle = "Posts by Tag - " + tag;
     <article
       class="grid w-full gap-8 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3"
     >
-      {filteredPosts.map((post) => <BlogPost post={post} />)}
+      {posts.map((post) => <BlogPost post={post} />)}
     </article>
   </section>
 </Layout>
