@@ -1,6 +1,5 @@
 ---
 import { socials } from "src/config";
-import Social from "./Social.astro";
 ---
 
 <footer class="mt-auto w-full">
@@ -9,6 +8,18 @@ import Social from "./Social.astro";
   </p>
 
   <ul class="flex justify-center gap-4 mb-4">
-    {socials.map((social) => <Social href={social.href} name={social.name} />)}
+    {
+      socials.map(({ name, href }) => (
+        <li>
+          <a
+            target="_blank"
+            class="text-gray-500 hover:text-gray-700 transition-colors"
+            href={href}
+          >
+            {name}
+          </a>
+        </li>
+      ))
+    }
   </ul>
 </footer>
