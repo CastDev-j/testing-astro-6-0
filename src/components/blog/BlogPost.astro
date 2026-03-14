@@ -10,16 +10,16 @@ const { post } = Astro.props;
 ---
 
 <a
-  class="w-full max-w-max md:max-w-2xs flex flex-col items-center outline-2 outline-current/20 rounded-b-sm hover:outline-indigo-500 transition-all"
+  class="w-full max-w-xl md:max-w-2xs flex flex-col items-center outline-2 outline-current/20 rounded-b-sm hover:outline-indigo-500 transition-all"
   href={post.url}
 >
   <Image
     src={post.frontmatter.image.url}
     alt={post.frontmatter.title}
-    width="800"
-    height="450"
+    width="256"
+    height="160"
     class="w-full h-auto"
-    loading="lazy"
+    loading="eager"
     transition:name={post.frontmatter.title + "1"}
   />
 

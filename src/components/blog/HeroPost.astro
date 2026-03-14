@@ -19,8 +19,8 @@ const { title, pubDate, description, author, image, tags } = Astro.props;
   <Image
     src={image.url}
     alt={image.alt}
-    width="256"
-    height="160"
+    width="800"
+    height="450"
     class="w-full h-auto rounded-lg min-w-3xs min-h-40"
     loading="eager"
     transition:name={title + "1"}
@@ -35,7 +35,7 @@ const { title, pubDate, description, author, image, tags } = Astro.props;
   <p>
     {description}
   </p>
-  <ul class="flex gap-2 my-2 self-start">
+  <ul class="flex gap-2 my-2 self-start flex-wrap">
     {
       tags.map((tag) => (
         <li>
