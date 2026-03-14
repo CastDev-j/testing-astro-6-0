@@ -21,9 +21,7 @@ const { frontmatter } = Astro.props;
 
 <Layout title={frontmatter.title}>
   <HeroPost {...frontmatter} />
-  <div
-    class="post-content min-h-48 flex flex-col items-start max-w-5xl w-full p-4"
-  >
+  <div class="post-content min-h-48 flex flex-col items-start max-w-5xl w-full">
     <slot />
   </div>
 </Layout>
