@@ -8,7 +8,7 @@ export async function getStaticPaths() {
     import.meta.glob<PostGlob>("../posts/*.md", { eager: true }),
   );
 
-  const tags = Array.from(new Set(posts.flatMap((p) => p.frontmatter.tags)));
+  const tags = [...new Set(posts.flatMap((p) => p.frontmatter.tags))];
 
   return tags.map((tag) => ({
     params: { tag },
