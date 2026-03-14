@@ -1,7 +1,7 @@
 export const routes = [
   { name: "Home", href: "/", activePaths: ["/"] },
   { name: "About", href: "/about", activePaths: ["/about"] },
-  { name: "Blog", href: "/blog", activePaths: ["/blog", "/posts/", "/tags/"] },
+  { name: "Blog", href: "/blog", activePaths: ["/blog", "/posts/", "/tags"] },
 ];
 
 export const socials = [
