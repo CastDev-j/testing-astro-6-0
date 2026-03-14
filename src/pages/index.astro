@@ -1,4 +1,5 @@
 ---
+import Greeting from "@components/home/Greeting";
 import Layout from "@layout/Layout.astro";
 
 const pageTitle = "Home";
@@ -9,12 +10,19 @@ const pageTitle = "Home";
     <article class="w-full flex flex-col items-center gap-6">
       <h1 class="text-2xl font-bold">{pageTitle}</h1>
       <div class="counter">00:00:00 AM</div>
-
-      <p>
-        This is the homepage of my Astro site. I'm still working through the
-        tutorial, but I'm excited to see how it turns out!
-      </p>
     </article>
+  </section>
+
+  <section class="max-w-5xl w-full p-4">
+    <Greeting
+      client:load
+      messages={[
+        "Hello, World!",
+        "Welcome to my Astro site!",
+        "Astro is awesome!",
+        "Have a great day!",
+      ]}
+    />
   </section>
 </Layout>
 
