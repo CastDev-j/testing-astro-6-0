@@ -1,0 +1,41 @@
+---
+import BlogPost from "@components/blog/BlogPost.astro";
+import type { PostGlob } from "@interfaces/post";
+import Layout from "@layout/Layout.astro";
+
+export async function getStaticPaths() {
+  const posts = Object.values(
+    import.meta.glob<PostGlob>("../posts/*.md", { eager: true }),
+  );
+
+  const tags = Array.from(new Set(posts.flatMap((p) => p.frontmatter.tags)));
+
+  return tags.map((tag) => ({
+    params: { tag },
+    props: {
+      filteredPosts: posts.filter((post) =>
+        post.frontmatter.tags.includes(tag),
+      ),
+    },
+  }));
+}
+
+const { tag } = Astro.params;
+const { filteredPosts } = Astro.props;
+
+const pageTitle = "Posts by Tag - " + tag;
+---
+
+<Layout title={pageTitle}>
+  <section class="max-w-5xl w-full p-4">
+    <h1 class="text-2xl font-bold">{pageTitle}: {tag}</h1>
+  </section>
+
+  <section class="w-full p-4 flex flex-col items-stretch justify-between">
+    <article
+      class="grid w-full gap-8 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3"
+    >
+      {filteredPosts.map((post) => <BlogPost post={post} />)}
+    </article>
+  </section>
+</Layout>

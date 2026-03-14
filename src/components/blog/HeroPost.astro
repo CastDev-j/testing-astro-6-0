@@ -38,8 +38,10 @@ const { title, pubDate, description, author, image, tags } = Astro.props;
   <ul class="flex gap-2 my-2 self-start">
     {
       tags.map((tag) => (
-        <li class="px-2 py-1 bg-gray-200 rounded" transition:name={tag}>
-          {tag}
+        <li>
+          <a href={`/tags/${tag}`} class="px-2 py-1 bg-gray-200 rounded">
+            {tag}
+          </a>
         </li>
       ))
     }

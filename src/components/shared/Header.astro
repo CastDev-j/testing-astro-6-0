@@ -15,7 +15,11 @@ const pathname = Astro.url.pathname;
               data-astro-reload
               class={cn(
                 "text-xl px-5 py-3 border-b-2 hover:border-b-indigo-500 hover:text-indigo-500 transition-colors",
-                route.href === pathname
+                route.activePaths.some((activePath) =>
+                  activePath === "/"
+                    ? pathname === "/"
+                    : pathname.startsWith(activePath),
+                )
                   ? "border-b-indigo-500 text-indigo-500"
                   : "border-transparent",
               )}

@@ -9,3 +9,8 @@ export interface Post {
   };
   tags: string[];
 }
+
+export interface PostGlob {
+  url: string;
+  frontmatter: Post;
+}

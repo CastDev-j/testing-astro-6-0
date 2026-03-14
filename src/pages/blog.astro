@@ -1,14 +1,11 @@
 ---
-import type { Post } from "@interfaces/post";
+import BlogPost from "@components/blog/BlogPost.astro";
+import type { PostGlob } from "@interfaces/post";
 import Layout from "@layout/Layout.astro";
-import Image from "astro/components/Image.astro";
 
 const allPosts = Object.values(
-  import.meta.glob("./posts/*.md", { eager: true }),
-) as {
-  url: string;
-  frontmatter: Post;
-}[];
+  import.meta.glob<PostGlob>("./posts/*.md", { eager: true }),
+);
 
 const pageTitle = "Blog";
 ---
@@ -19,38 +16,10 @@ const pageTitle = "Blog";
   </section>
 
   <section class="w-full p-4 flex flex-col items-stretch justify-between">
-    <article class="flex justify-center w-full gap-8 flex-wrap">
-      {
-        allPosts.map((post) => (
-          <a
-            class="w-full max-w-max md:max-w-2xs flex flex-col items-center gap-4 outline-2 outline-offset-8 outline-current/20 rounded-sm hover:outline-indigo-500 transition-all"
-            href={post.url}
-          >
-            <Image
-              src={post.frontmatter.image.url}
-              alt={post.frontmatter.title}
-              width="800"
-              height="450"
-              class="w-full h-auto rounded-lg"
-              loading="lazy"
-              transition:name={post.frontmatter.title + "1"}
-            />
-            <h2
-              class="text-2xl font-semibold"
-              transition:name={post.frontmatter.title + "2"}
-            >
-              {post.frontmatter.title}
-            </h2>
-            <p
-              class="text-gray-500 text-sm"
-              transition:name={post.frontmatter.title + "3"}
-            >
-              By {post.frontmatter.author} on{" "}
-              {new Date(post.frontmatter.pubDate).toLocaleDateString()}
-            </p>
-          </a>
-        ))
-      }
+    <article
+      class="grid w-full gap-8 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3"
+    >
+      {allPosts.map((post) => <BlogPost post={post} />)}
     </article>
   </section>
 </Layout>
