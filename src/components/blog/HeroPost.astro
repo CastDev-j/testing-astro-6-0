@@ -1,7 +1,10 @@
 ---
 import type { Post } from "@interfaces/post";
+import { Image } from "astro:assets";
 
 interface Props extends Post {}
+
+const { title, pubDate, description, author, image, tags } = Astro.props;
 ---
 
 <article class="max-w-5xl w-full py-4 flex flex-col gap-2 items-center">
@@ -13,30 +16,28 @@ interface Props extends Post {}
     &#x276E; Go back to blog
   </a>
 
-  <img
-    src={Astro.props.image.url}
-    alt={Astro.props.image.alt}
-    class="w-full h-auto rounded-lg"
-    loading="lazy"
-    transition:name={Astro.props.title + "1"}
+  <Image
+    src={image.url}
+    alt={image.alt}
+    width="256"
+    height="160"
+    class="w-full h-auto rounded-lg min-w-3xs min-h-40"
+    loading="eager"
+    transition:name={title + "1"}
   />
-  <p
-    class="text-gray-500 text-sm self-start"
-    transition:name={Astro.props.title + "3"}
-  >
-    By {Astro.props.author} on {
-      new Date(Astro.props.pubDate).toLocaleDateString()
-    }
+
+  <p class="text-gray-500 text-sm self-start" transition:name={title + "3"}>
+    By {author} on {new Date(pubDate).toLocaleDateString()}
   </p>
-  <h1 class="text-3xl font-bold" transition:name={Astro.props.title + "2"}>
-    {Astro.props.title}
+  <h1 class="text-3xl font-bold" transition:name={title + "2"}>
+    {title}
   </h1>
   <p>
-    {Astro.props.description}
+    {description}
   </p>
   <ul class="flex gap-2 my-2 self-start">
     {
-      Astro.props.tags.map((tag) => (
+      tags.map((tag) => (
         <li class="px-2 py-1 bg-gray-200 rounded" transition:name={tag}>
           {tag}
         </li>
