@@ -125,7 +125,7 @@ const { frontmatter } = Astro.props;
   }
 
   .post-content :global(code) {
-    background: #334155;
+    background: #e6e8ed;
     color: #db2777;
     border-radius: 0.25rem;
     padding: 0.125rem 0.25rem;
@@ -134,11 +134,12 @@ const { frontmatter } = Astro.props;
   }
 
   :global(.dark) .post-content :global(code) {
+    background: #334155;
     color: #f472b6;
   }
 
   .post-content :global(pre code) {
-    background: transparent;
+    background: transparent !important;
     color: inherit;
     border-radius: 0;
     padding: 0;
