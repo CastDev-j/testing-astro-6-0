@@ -5,6 +5,8 @@ import tailwindcss from '@tailwindcss/vite';
 
 import preact from '@astrojs/preact';
 
+import cloudflare from '@astrojs/cloudflare';
+
 // https://astro.build/config
 export default defineConfig({
   vite: {
@@ -13,4 +15,5 @@ export default defineConfig({
 
   trailingSlash: 'never',
   integrations: [preact()],
+  adapter: cloudflare(),
 });
