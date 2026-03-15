@@ -1,5 +1,15 @@
 @import "tailwindcss";
+
 @custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+    --color-primary: #3b82f6;
+}
+
+.dark {
+    --color-primary: #f97316;
+}
+
 
 html {
     scrollbar-gutter: stable;
