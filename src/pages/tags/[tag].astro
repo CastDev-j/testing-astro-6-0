@@ -1,23 +1,17 @@
 ---
 import BlogPost from "@components/blog/BlogPost.astro";
-import type { PostGlob } from "@interfaces/post";
 import BlogLayout from "@layout/BlogLayout.astro";
 import { getCollection } from "astro:content";
 
 export async function getStaticPaths() {
-  const allPosts = await getCollection("blog");
+  const posts = await getCollection("blog");
 
-  const posts: PostGlob[] = allPosts.map((p) => ({
-    url: `/posts/${p.id}`,
-    frontmatter: p.data,
-  }));
-
-  const tags = [...new Set(posts.flatMap((p) => p.frontmatter.tags))];
+  const tags = [...new Set(posts.flatMap((p) => p.data.tags))];
 
   return tags.map((tag) => ({
     params: { tag: tag.replace(/\s+/g, "-").toLowerCase() },
     props: {
-      posts: posts.filter((post) => post.frontmatter.tags.includes(tag)),
+      posts: posts.filter((post) => post.data.tags.includes(tag)),
     },
   }));
 }
@@ -37,7 +31,11 @@ const pageTitle = "Posts by Tag - " + tag;
     <article
       class="grid w-full gap-8 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3"
     >
-      {posts.map((post) => <BlogPost post={post} />)}
+      {
+        posts.map((post) => (
+          <BlogPost url={`/posts/${post.id}`} post={post.data} />
+        ))
+      }
     </article>
   </section>
 </BlogLayout>

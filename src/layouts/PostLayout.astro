@@ -4,14 +4,14 @@ import Layout from "./Layout.astro";
 import type { Post } from "@interfaces/post";
 
 interface Props {
-  frontmatter: Post;
+  post: Post;
 }
 
-const { frontmatter } = Astro.props;
+const { post } = Astro.props;
 ---
 
-<Layout title={frontmatter.title}>
-  <HeroPost {...frontmatter} />
+<Layout title={post.title}>
+  <HeroPost {...post} />
   <div class="post-content min-h-48 flex flex-col items-start max-w-5xl w-full">
     <slot />
   </div>

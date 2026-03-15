@@ -1,17 +1,11 @@
 ---
-import type { PostGlob } from "@interfaces/post";
 import Layout from "./Layout.astro";
 import { cn } from "@lib/cn";
 import { getCollection } from "astro:content";
 
-const allPosts = await getCollection("blog");
+const posts = await getCollection("blog");
 
-const posts: PostGlob[] = allPosts.map((p) => ({
-  url: `/posts/${p.id}`,
-  frontmatter: p.data,
-}));
-
-const tags = [...new Set(posts.flatMap((p) => p.frontmatter.tags))];
+const tags = [...new Set(posts.flatMap((p) => p.data.tags))];
 
 interface Props {
   title: string;

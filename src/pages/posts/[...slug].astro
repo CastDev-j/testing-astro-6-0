@@ -17,6 +17,6 @@ const post: Post = entry.data;
 const { Content } = await render(entry);
 ---
 
-<PostLayout frontmatter={post}>
+<PostLayout post={post}>
   <Content />
 </PostLayout>

@@ -1,13 +1,14 @@
 ---
-import type { PostGlob } from "@interfaces/post";
+import type { Post } from "@interfaces/post";
 import { cn } from "@lib/cn";
 import Image from "astro/components/Image.astro";
 
 interface Props {
-  post: PostGlob;
+  url: string;
+  post: Post;
 }
 
-const { post } = Astro.props;
+const { url, post } = Astro.props;
 ---
 
 <a
@@ -16,31 +17,25 @@ const { post } = Astro.props;
     "hover:outline-indigo-500",
     "dark:hover:outline-indigo-300",
   )}
-  href={post.url}
+  href={url}
 >
   <Image
-    src={post.frontmatter.image.url}
-    alt={post.frontmatter.title}
+    src={post.image.url}
+    alt={post.title}
     width="256"
     height="160"
     class="w-full h-auto"
     loading="eager"
-    transition:name={post.frontmatter.title + "1"}
+    transition:name={post.title + "1"}
   />
 
   <div class="p-4 flex flex-col items-start gap-2">
-    <h2
-      class="text-2xl font-semibold"
-      transition:name={post.frontmatter.title + "2"}
-    >
-      {post.frontmatter.title}
+    <h2 class="text-2xl font-semibold" transition:name={post.title + "2"}>
+      {post.title}
     </h2>
-    <p
-      class="text-gray-500 text-sm"
-      transition:name={post.frontmatter.title + "3"}
-    >
-      By {post.frontmatter.author} on{" "}
-      {new Date(post.frontmatter.pubDate).toLocaleDateString()}
+    <p class="text-gray-500 text-sm" transition:name={post.title + "3"}>
+      By {post.author} on{" "}
+      {new Date(post.pubDate).toLocaleDateString()}
     </p>
   </div>
 </a>
