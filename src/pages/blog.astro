@@ -2,10 +2,14 @@
 import BlogPost from "@components/blog/BlogPost.astro";
 import type { PostGlob } from "@interfaces/post";
 import BlogLayout from "@layout/BlogLayout.astro";
+import { getCollection } from "astro:content";
 
-const allPosts = Object.values(
-  import.meta.glob<PostGlob>("./posts/*.md", { eager: true }),
-);
+const allPosts = await getCollection("blog");
+
+const posts: PostGlob[] = allPosts.map((p) => ({
+  url: `/posts/${p.id}`,
+  frontmatter: p.data,
+}));
 
 const pageTitle = "Blog";
 ---
@@ -19,7 +23,7 @@ const pageTitle = "Blog";
     <article
       class="grid w-full gap-8 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3"
     >
-      {allPosts.map((post) => <BlogPost post={post} />)}
+      {posts.map((post) => <BlogPost post={post} />)}
     </article>
   </section>
 </BlogLayout>

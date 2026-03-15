@@ -2,10 +2,14 @@
 import type { PostGlob } from "@interfaces/post";
 import Layout from "./Layout.astro";
 import { cn } from "@lib/cn";
+import { getCollection } from "astro:content";
 
-const posts = Object.values(
-  import.meta.glob<PostGlob>("../pages/posts/*.md", { eager: true }),
-);
+const allPosts = await getCollection("blog");
+
+const posts: PostGlob[] = allPosts.map((p) => ({
+  url: `/posts/${p.id}`,
+  frontmatter: p.data,
+}));
 
 const tags = [...new Set(posts.flatMap((p) => p.frontmatter.tags))];
 

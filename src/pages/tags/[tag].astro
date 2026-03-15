@@ -2,11 +2,15 @@
 import BlogPost from "@components/blog/BlogPost.astro";
 import type { PostGlob } from "@interfaces/post";
 import BlogLayout from "@layout/BlogLayout.astro";
+import { getCollection } from "astro:content";
 
 export async function getStaticPaths() {
-  const posts = Object.values(
-    import.meta.glob<PostGlob>("../posts/*.md", { eager: true }),
-  );
+  const allPosts = await getCollection("blog");
+
+  const posts: PostGlob[] = allPosts.map((p) => ({
+    url: `/posts/${p.id}`,
+    frontmatter: p.data,
+  }));
 
   const tags = [...new Set(posts.flatMap((p) => p.frontmatter.tags))];
 
