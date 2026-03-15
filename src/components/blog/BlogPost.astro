@@ -12,11 +12,13 @@ const { url, post } = Astro.props;
 ---
 
 <a
-  class={cn(
-    "w-full max-w-xl md:max-w-2xs flex flex-col items-center outline-2 outline-current/20 rounded-b-sm transition-all",
-    "hover:outline-indigo-500",
-    "dark:hover:outline-indigo-300",
-  )}
+  class={cn({
+    inputs: [
+      "w-full max-w-xl md:max-w-2xs flex flex-col items-center outline-2 outline-current/20 rounded-b-sm transition-all",
+      "hover:outline-indigo-500",
+      "dark:hover:outline-indigo-300",
+    ],
+  })}
   href={url}
 >
   <Image

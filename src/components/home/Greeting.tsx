@@ -17,11 +17,13 @@ export default function Greeting({ messages }: GreetingProps) {
         {greeting}! Thank you for visiting!
       </h3>
       <button
-        class={cn(
-          "mt-2 px-4 py-2  rounded transition-colors",
-          "bg-blue-600 text-white hover:bg-blue-700",
-          "dark:bg-blue-500 dark:hover:bg-blue-600",
-        )}
+        class={cn({
+          inputs: [
+            "mt-2 px-4 py-2  rounded transition-colors",
+            "bg-blue-600 text-white hover:bg-blue-700",
+            "dark:bg-blue-500 dark:hover:bg-blue-600",
+          ],
+        })}
         onClick={() => setGreeting(randomMessage())}
       >
         New Greeting

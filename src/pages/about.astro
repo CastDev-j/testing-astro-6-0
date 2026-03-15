@@ -19,11 +19,13 @@ const pageTitle = "About Me";
             <li>
               <a
                 target="_blank"
-                class={cn(
-                  "flex items-center gap-4 px-4 py-2  transition-colors rounded-sm border",
-                  " hover:bg-indigo-50 border-indigo-200",
-                  " dark:hover:bg-gray-700 dark:border-gray-600",
-                )}
+                class={cn({
+                  inputs: [
+                    "flex items-center gap-4 px-4 py-2  transition-colors rounded-sm border",
+                    " hover:bg-indigo-50 border-indigo-200",
+                    " dark:hover:bg-gray-700 dark:border-gray-600",
+                  ],
+                })}
                 href={social.href}
               >
                 {social.name} | {social.text}
@@ -43,11 +45,13 @@ const pageTitle = "About Me";
             <li>
               <a
                 target="_blank"
-                class={cn(
-                  "flex items-center gap-4 px-4 py-2 bg-transparent transition-colors rounded-sm border",
-                  "hover:bg-indigo-100 border-indigo-200",
-                  "dark:hover:bg-gray-700 dark:border-gray-600",
-                )}
+                class={cn({
+                  inputs: [
+                    "flex items-center gap-4 px-4 py-2 bg-transparent transition-colors rounded-sm border",
+                    "hover:bg-indigo-100 border-indigo-200",
+                    "dark:hover:bg-gray-700 dark:border-gray-600",
+                  ],
+                })}
                 href={certificate.url}
               >
                 <img
