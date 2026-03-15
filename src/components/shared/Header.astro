@@ -5,7 +5,7 @@ import { routes } from "src/config";
 const pathname = Astro.url.pathname;
 ---
 
-<header class="w-full flex justify-center my-4">
+<header class={cn("w-full flex justify-center my-4")}>
   <nav>
     <ul class="flex gap-6 flex-wrap justify-center">
       {
@@ -14,13 +14,15 @@ const pathname = Astro.url.pathname;
             <a
               data-astro-reload
               class={cn(
-                "text-xl px-5 py-3 border-b-2 hover:border-b-indigo-500 hover:text-indigo-500 transition-colors",
+                "text-xl px-5 py-3 border-b-2 transition-colors",
+                "hover:border-b-indigo-500 hover:text-indigo-500",
+                "dark:hover:border-b-indigo-300 dark:hover:text-indigo-300",
                 route.activePaths.some((activePath) =>
                   activePath === "/"
                     ? pathname === "/"
                     : pathname.startsWith(activePath),
                 )
-                  ? "border-b-indigo-500 text-indigo-500"
+                  ? "border-b-indigo-500 text-indigo-500 dark:border-b-indigo-300 dark:text-indigo-300"
                   : "border-transparent",
               )}
               href={route.href}

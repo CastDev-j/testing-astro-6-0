@@ -1,3 +1,4 @@
+import { cn } from "@lib/cn";
 import { useState } from "preact/hooks";
 
 interface GreetingProps {
@@ -12,11 +13,15 @@ export default function Greeting({ messages }: GreetingProps) {
 
   return (
     <article class="w-full flex flex-col items-center ">
-      <h3 class=" font-semibold text-blue-700">
+      <h3 class=" font-semibold text-blue-700 dark:text-blue-300 text-lg">
         {greeting}! Thank you for visiting!
       </h3>
       <button
-        class="mt-2 px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition-colors"
+        class={cn(
+          "mt-2 px-4 py-2  rounded transition-colors",
+          "bg-blue-600 text-white hover:bg-blue-700",
+          "dark:bg-blue-500 dark:hover:bg-blue-600",
+        )}
         onClick={() => setGreeting(randomMessage())}
       >
         New Greeting

@@ -1,5 +1,6 @@
 ---
 import type { PostGlob } from "@interfaces/post";
+import { cn } from "@lib/cn";
 import Image from "astro/components/Image.astro";
 
 interface Props {
@@ -10,7 +11,11 @@ const { post } = Astro.props;
 ---
 
 <a
-  class="w-full max-w-xl md:max-w-2xs flex flex-col items-center outline-2 outline-current/20 rounded-b-sm hover:outline-indigo-500 transition-all"
+  class={cn(
+    "w-full max-w-xl md:max-w-2xs flex flex-col items-center outline-2 outline-current/20 rounded-b-sm transition-all",
+    "hover:outline-indigo-500",
+    "dark:hover:outline-indigo-300",
+  )}
   href={post.url}
 >
   <Image

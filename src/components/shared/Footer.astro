@@ -1,11 +1,23 @@
 ---
 import { socials } from "src/config";
+import ThemeIcon from "./ThemeIcon.astro";
+import { cn } from "@lib/cn";
 ---
 
-<footer class="mt-auto w-full">
-  <p class="text-center text-sm text-gray-500 py-4">
-    &copy; {new Date().getFullYear()} Testing Astro. All rights reserved.
-  </p>
+<footer
+  class={cn(
+    "mt-auto w-full flex flex-col items-center gap-2 bg-amber-200",
+    "bg-gray-50 text-gray-700",
+    "dark:bg-gray-800 dark:text-gray-300",
+  )}
+>
+  <div class="flex flex-col items-center gap-2">
+    <p class="text-center text-sm">
+      &copy; {new Date().getFullYear()} Testing Astro. All rights reserved.
+    </p>
+
+    <ThemeIcon />
+  </div>
 
   <ul class="flex justify-center gap-4 mb-4">
     {
@@ -13,7 +25,10 @@ import { socials } from "src/config";
         <li>
           <a
             target="_blank"
-            class="text-gray-500 hover:text-gray-700 transition-colors"
+            class={cn(
+              " hover:text-gray-700 transition-colors",
+              "dark:text-gray-400 dark:hover:text-gray-300",
+            )}
             href={href}
           >
             {name}

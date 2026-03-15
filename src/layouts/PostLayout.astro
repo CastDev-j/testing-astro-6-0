@@ -92,12 +92,23 @@ const { frontmatter } = Astro.props;
     color: #1e40af;
   }
 
+  :global(.dark) .post-content :global(a) {
+    color: #a5b4fc;
+  }
+  :global(.dark) .post-content :global(a:hover) {
+    color: #818cf8;
+  }
+
   .post-content :global(blockquote) {
     border-left: 4px solid #d1d5db;
     padding-left: 1rem;
     font-style: italic;
     color: #4b5563;
     margin-bottom: 1rem;
+  }
+  :global(.dark) .post-content :global(blockquote) {
+    border-left: 4px solid #374151;
+    color: #9ca3af;
   }
 
   .post-content :global(pre) {
@@ -108,14 +119,22 @@ const { frontmatter } = Astro.props;
     margin-bottom: 1rem;
     overflow-x: auto;
   }
+  :global(.dark) .post-content :global(pre) {
+    background: #1e293b;
+    color: #f3f4f6;
+  }
 
   .post-content :global(code) {
-    background: #f3f4f6;
+    background: #334155;
     color: #db2777;
     border-radius: 0.25rem;
     padding: 0.125rem 0.25rem;
     font-family: monospace;
     font-size: 0.875rem;
+  }
+
+  :global(.dark) .post-content :global(code) {
+    color: #f472b6;
   }
 
   .post-content :global(pre code) {
@@ -147,9 +166,17 @@ const { frontmatter } = Astro.props;
     border: 1px solid #e5e7eb;
     padding: 0.5rem 1rem;
   }
+  :global(.dark) .post-content :global(th),
+  :global(.dark) .post-content :global(td) {
+    border: 1px solid #374151;
+  }
 
   .post-content :global(th) {
     background: #f3f4f6;
     font-weight: 600;
+  }
+  :global(.dark) .post-content :global(th) {
+    background: #1e293b;
+    color: #f3f4f6;
   }
 </style>
