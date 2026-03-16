@@ -1,0 +1,27 @@
+---
+export const prerender = false;
+import Layout from "@layout/Layout.astro";
+import { cn } from "@lib/cn";
+
+const { route } = Astro.params;
+
+const pageTitle = "Route" + (route ? `: ${route}` : "");
+---
+
+<Layout title={pageTitle}>
+  <section class="max-w-5xl w-full p-4">
+    <a
+      href="/route"
+      class="self-start px-2 py-3 text-sm flex items-center gap-2 transition-colors duration-200 font-medium group text-primary hover:text-primary-hover"
+      aria-label="Go back to blog"
+    >
+      &#x276E; Go back to Route
+    </a>
+
+    <article class="w-full flex flex-col items-center gap-6">
+      <h1 class="text-2xl font-bold">{pageTitle}</h1>
+    </article>
+  </section>
+
+  <section class="max-w-5xl w-full p-4"></section>
+</Layout>
