@@ -23,15 +23,13 @@ const { title } = Astro.props;
         tags.map((tag) => (
           <a
             href={`/tags/${tag.replace(/\s+/g, "-").toLowerCase()}`}
-            class={cn({
-              inputs: [
-                "px-2 py-1 text-lg outline-2 outline-dotted rounded-lg transition-colors duration-200",
-                "hover:outline-indigo-500 hover:text-indigo-500",
-                "dark:hover:outline-indigo-300 dark:hover:text-indigo-300",
-                pathname === tag.replace(/\s+/g, "-").toLowerCase() &&
-                  "border-b-indigo-500 text-indigo-500 dark:border-b-indigo-300 dark:text-indigo-300",
-              ],
-            })}
+            class={cn(
+              "px-2 py-1 text-lg outline-2 outline-dotted rounded-lg transition-colors duration-200",
+              "hover:outline-indigo-500 hover:text-indigo-500",
+              "dark:hover:outline-indigo-300 dark:hover:text-indigo-300",
+              pathname === tag.replace(/\s+/g, "-").toLowerCase() &&
+                "border-b-indigo-500 text-indigo-500 dark:border-b-indigo-300 dark:text-indigo-300",
+            )}
           >
             {tag}
           </a>
