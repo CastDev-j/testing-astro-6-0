@@ -18,9 +18,7 @@ export default function Greeting({ messages }: GreetingProps) {
       </h3>
       <button
         class={cn(
-          "mt-2 px-4 py-2  rounded transition-colors",
-          "bg-blue-600 text-white hover:bg-blue-700",
-          "dark:bg-blue-500 dark:hover:bg-blue-600",
+          " mt-2 px-4 py-2 rounded transition-colors bg-button-primary-bg text-button-primary-text hover:bg-button-primary-bg-hover",
         )}
         onClick={() => setGreeting(randomMessage())}
       >
