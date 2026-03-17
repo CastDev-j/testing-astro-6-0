@@ -1,25 +1,20 @@
 ---
+import type { GetStaticPaths } from "astro";
 import BlogPost from "@components/blog/BlogPost.astro";
 import BlogLayout from "@layout/BlogLayout.astro";
 import { getCollection } from "astro:content";
+import Pagination from "@components/shared/Pagination.astro";
 
-export async function getStaticPaths() {
+export const getStaticPaths = (async ({ paginate, routePattern }) => {
   const posts = await getCollection("blog");
+  console.log({ routePattern });
 
-  const tags = [...new Set(posts.flatMap((p) => p.data.tags))];
+  return paginate(posts, { pageSize: 6 });
+}) satisfies GetStaticPaths;
 
-  return tags.map((tag) => ({
-    params: { tag: tag.replace(/\s+/g, "-").toLowerCase() },
-    props: {
-      posts: posts.filter((post) => post.data.tags.includes(tag)),
-    },
-  }));
-}
+const { page } = Astro.props;
 
-const { tag } = Astro.params;
-const { posts } = Astro.props;
-
-const pageTitle = "Posts by Tag - " + tag;
+const pageTitle = `Blog - Page ${page.currentPage}`;
 ---
 
 <BlogLayout title={pageTitle}>
@@ -27,15 +22,19 @@ const pageTitle = "Posts by Tag - " + tag;
     <h1 class="text-2xl font-bold">{pageTitle}</h1>
   </section>
 
-  <section class="w-full p-4 flex flex-col items-stretch justify-between">
+  <section
+    class="w-full p-4 flex flex-col items-stretch justify-between min-h-96"
+  >
     <article
       class="grid w-full gap-8 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3"
     >
       {
-        posts.map((post) => (
+        page.data.map((post) => (
           <BlogPost url={`/posts/${post.id}`} post={post.data} />
         ))
       }
     </article>
+
+    <Pagination page={page} />
   </section>
 </BlogLayout>

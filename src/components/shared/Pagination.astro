@@ -1,0 +1,26 @@
+---
+import type { Page } from "astro";
+
+interface Props {
+  page: Page;
+}
+
+const { page } = Astro.props;
+---
+
+<div class="w-full flex items-center justify-center gap-4 mt-8">
+  {
+    page.url.prev && (
+      <a href={`${page.url.prev}`} class="px-4 py-2 ">
+        &larr; Previous
+      </a>
+    )
+  }
+  {
+    page.url.next && (
+      <a href={`${page.url.next}`} class="px-4 py-2 ">
+        Next &rarr;
+      </a>
+    )
+  }
+</div>

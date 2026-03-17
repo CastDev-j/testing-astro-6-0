@@ -18,13 +18,13 @@ const { title } = Astro.props;
 
 <Layout title={title}>
   <section class="w-full p-4 flex flex-col items-stretch justify-between">
-    <article class="flex flex-wrap w-full gap-4">
+    <article class="flex flex-wrap w-full gap-2">
       {
         tags.map((tag) => (
           <a
             href={`/tags/${tag.replace(/\s+/g, "-").toLowerCase()}`}
             class={cn(
-              "px-2 py-1 text-lg outline-2 outline-dotted rounded-lg transition-colors duration-200 hover:outline-primary hover:text-primary",
+              "px-2 py-0.5 text-xs outline-2 outline-dotted rounded-lg transition-colors duration-200 hover:outline-primary hover:text-primary",
               pathname === tag.replace(/\s+/g, "-").toLowerCase() &&
                 "border-b-primary text-primary",
             )}

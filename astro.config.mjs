@@ -16,4 +16,6 @@ export default defineConfig({
   trailingSlash: 'never',
   integrations: [preact()],
   adapter: cloudflare(),
+  output: 'static',
+
 });

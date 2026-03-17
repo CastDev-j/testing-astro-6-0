@@ -1,0 +1,48 @@
+---
+import type { GetStaticPaths } from "astro";
+import BlogPost from "@components/blog/BlogPost.astro";
+import BlogLayout from "@layout/BlogLayout.astro";
+import { getCollection } from "astro:content";
+import Pagination from "@components/shared/Pagination.astro";
+
+export const getStaticPaths = (async ({ paginate }) => {
+  const posts = await getCollection("blog");
+
+  const tags = [...new Set(posts.flatMap((p) => p.data.tags))];
+
+  return tags.flatMap((tag) => {
+    const filteredPosts = posts.filter((post) => post.data.tags.includes(tag));
+    const tagSlug = tag.replace(/\s+/g, "-").toLowerCase();
+
+    return paginate(filteredPosts, {
+      params: { tag: tagSlug },
+      pageSize: 6,
+    });
+  });
+}) satisfies GetStaticPaths;
+
+const { tag } = Astro.params;
+const { page } = Astro.props;
+
+const pageTitle = "Posts by Tag - " + tag;
+---
+
+<BlogLayout title={pageTitle}>
+  <section class="max-w-5xl w-full p-4">
+    <h1 class="text-2xl font-bold">{pageTitle}</h1>
+  </section>
+
+  <section class="w-full p-4 flex flex-col items-stretch justify-between">
+    <article
+      class="grid w-full gap-8 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3"
+    >
+      {
+        page.data.map((post) => (
+          <BlogPost url={`/posts/${post.id}`} post={post.data} />
+        ))
+      }
+    </article>
+
+    <Pagination page={page} />
+  </section>
+</BlogLayout>
