@@ -18,4 +18,5 @@ export default defineConfig({
   adapter: cloudflare(),
   output: 'static',
 
+
 });
