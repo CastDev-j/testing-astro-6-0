@@ -12,7 +12,6 @@ const pathname = Astro.url.pathname;
         routes.map((route) => (
           <li class="list-none">
             <a
-              data-astro-reload
               class={cn(
                 "text-xl px-5 py-3 border-b-2 transition-colors hover:border-b-primary hover:text-primary",
                 route.activePaths.some((activePath) =>

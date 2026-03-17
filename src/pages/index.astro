@@ -31,11 +31,27 @@ const number = Astro.url.searchParams.get("number");
 </Layout>
 
 <script>
-  const counter = document.querySelector(".counter") as HTMLDivElement;
+  let intervalId: NodeJS.Timeout | null = null;
 
-  counter.textContent = new Date().toLocaleTimeString();
+  const loadClock = () => {
+    const counter = document.querySelector(".counter") as HTMLDivElement;
 
-  setInterval(() => {
+    if (!counter) return;
+
     counter.textContent = new Date().toLocaleTimeString();
-  }, 1000);
+
+    intervalId = setInterval(() => {
+      counter.textContent = new Date().toLocaleTimeString();
+      console.log("updated");
+    }, 1000);
+  };
+
+  const cleanupClock = () => {
+    if (intervalId) {
+      clearInterval(intervalId);
+    }
+  };
+
+  document.addEventListener("astro:page-load", loadClock);
+  document.addEventListener("astro:before-swap", cleanupClock);
 </script>
