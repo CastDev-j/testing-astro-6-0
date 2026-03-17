@@ -42,7 +42,6 @@ const number = Astro.url.searchParams.get("number");
 
     intervalId = setInterval(() => {
       counter.textContent = new Date().toLocaleTimeString();
-      console.log("updated");
     }, 1000);
   };
 
