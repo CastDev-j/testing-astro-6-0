@@ -6,10 +6,8 @@ import BlogLayout from "@layout/BlogLayout.astro";
 import { getCollection } from "astro:content";
 import Pagination from "@components/shared/Pagination.astro";
 
-export const getStaticPaths = (async ({ paginate, routePattern }) => {
+export const getStaticPaths = (async ({ paginate }) => {
   const posts = await getCollection("blog");
-  console.log({ routePattern });
-
   return paginate(posts, { pageSize: 6 });
 }) satisfies GetStaticPaths;
 
