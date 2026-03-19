@@ -3,6 +3,11 @@ export const routes = [
   { name: "About", href: "/about", activePaths: ["/about"] },
   { name: "Blog", href: "/blog", activePaths: ["/blog", "/posts/", "/tags"] },
   { name: "Route", href: "/route", activePaths: ["/route"] },
+  {
+    name: "unaccessible",
+    href: "/unaccessible",
+    activePaths: ["/unaccessible"],
+  },
 ];
 
 export const socials = [
