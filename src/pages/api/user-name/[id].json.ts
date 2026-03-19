@@ -22,13 +22,19 @@ export const GET = (async ({ params, request }) => {
       id,
       name: userNames[+id],
     }),
+    {
+      status: 200,
+      headers: {
+        "Content-Type": "application/json",
+      },
+    },
   );
 }) satisfies APIRoute;
 
-export const getStaticPaths = (async () => {
-  return userNames.map((_, index) => ({
-    params: {
-      id: index.toString(),
-    },
-  }));
-}) satisfies GetStaticPaths;
+// export const getStaticPaths = (async () => {
+//   return userNames.map((_, index) => ({
+//     params: {
+//       id: index.toString(),
+//     },
+//   }));
+// }) satisfies GetStaticPaths;
