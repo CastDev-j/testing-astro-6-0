@@ -49,6 +49,8 @@ if (error) {
   const loadForm = () => {
     const form = document.querySelector(".route-form") as HTMLFormElement;
 
+    if (!form) return;
+
     form.addEventListener("submit", (e) => {
       e.preventDefault();
       const formData = new FormData(form);
