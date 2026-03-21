@@ -7,15 +7,13 @@ const pageTitle = "Home";
 
 const number = Astro.url.searchParams.get("number");
 const data = Astro.locals;
-
-const currentTime = new Date().toLocaleTimeString();
 ---
 
 <Layout title={pageTitle}>
   <section class="max-w-5xl w-full p-4">
     <article class="w-full flex flex-col items-center gap-6">
       <h1 class="text-2xl font-bold">{pageTitle}</h1>
-      <div class="counter text-primary">{currentTime}</div>
+      <div class="counter text-primary">00:00:00 AM</div>
       {number && <p>Number: {number}</p>}
       {data && <p>Data: {data.title}</p>}
     </article>
@@ -41,6 +39,8 @@ const currentTime = new Date().toLocaleTimeString();
     const counter = document.querySelector(".counter") as HTMLDivElement;
 
     if (!counter) return;
+
+    counter.textContent = new Date().toLocaleTimeString();
 
     intervalId = setInterval(() => {
       counter.textContent = new Date().toLocaleTimeString();
