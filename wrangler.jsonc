@@ -20,8 +20,8 @@
       // Cloudflare location
       // Period: the duration of the period, in seconds. Must be either 10 or 60
       "simple": {
-        "limit": 20,
-        "period": 10,
+        "limit": 100,
+        "period": 60,
       },
     },
   ],

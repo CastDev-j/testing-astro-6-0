@@ -1,4 +1,17 @@
 import { defineMiddleware, sequence } from "astro:middleware";
+import { env } from "cloudflare:workers";
+
+const rateLimit = defineMiddleware(async (context, next) => {
+  const { success } = await env.MY_RATE_LIMITER.limit({
+    key: context.url.pathname,
+  });
+
+  if (!success) {
+    return new Response("Too many requests", { status: 429 });
+  }
+
+  return next();
+});
 
 const modifyHtml = defineMiddleware(async (context, next) => {
   const response = await next();
@@ -27,4 +40,9 @@ const setRewriting = defineMiddleware(async (context, next) => {
   return next();
 });
 
-export const onRequest = sequence(setRewriting, setTitle, modifyHtml);
+export const onRequest = sequence(
+  rateLimit,
+  setRewriting,
+  setTitle,
+  modifyHtml,
+);
