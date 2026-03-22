@@ -1,5 +1,6 @@
 ---
 export const prerender = false;
+import Greeting from "@components/home/Greeting";
 import Layout from "@layout/Layout.astro";
 
 const pageTitle = "Route";
@@ -16,7 +17,9 @@ if (error) {
 <Layout title={pageTitle}>
   <section class="max-w-5xl w-full p-4">
     <article class="w-full flex flex-col items-center gap-6">
-      <h1 class="text-2xl font-bold">{pageTitle}</h1>
+      <h1 class="text-2xl font-bold" transition:name="title">
+        {pageTitle}
+      </h1>
     </article>
   </section>
 
@@ -40,6 +43,21 @@ if (error) {
         </button>
       </div>
     </form>
+  </section>
+
+  <section class="max-w-5xl w-full p-4 flex items-center justify-center">
+    <Greeting
+      transition:persist
+      transition:persist-props
+      transition:name="greeting"
+      client:load
+      messages={[
+        "Hello, World!",
+        "Welcome to my Astro site!",
+        "Astro is awesome!",
+        "Have a great day!",
+      ]}
+    />
   </section>
 </Layout>
 

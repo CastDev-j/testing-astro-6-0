@@ -12,8 +12,10 @@ export default function Greeting({ messages }: GreetingProps) {
   const [greeting, setGreeting] = useState(messages[0]);
 
   return (
-    <article class="w-full flex flex-col items-center ">
-      <h3 class=" font-semibold text-blue-700 dark:text-blue-300 text-lg">
+    <article class="flex flex-col items-center border-2 p-4 rounded-sm w-fit">
+      <h2>This component mantains its state using Astro transitions</h2>
+
+      <h3 class=" font-semibold text-primary text-lg">
         {greeting}! Thank you for visiting!
       </h3>
       <button
