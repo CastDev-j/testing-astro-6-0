@@ -55,8 +55,9 @@
       document.documentElement.classList.add("dark");
     }
   };
+
+  document.addEventListener("astro:after-swap", loadTheme);
   loadTheme();
-  document.addEventListener("astro:page-load", loadTheme);
 </script>
 
 <script is:inline>
