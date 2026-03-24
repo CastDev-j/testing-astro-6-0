@@ -1,14 +1,9 @@
 // @ts-check
-import { defineConfig } from 'astro/config';
-
+import { defineConfig, fontProviders } from 'astro/config';
 import tailwindcss from '@tailwindcss/vite';
-
-
 import cloudflare from '@astrojs/cloudflare';
-
 import preact from '@astrojs/preact';
 
-// https://astro.build/config
 export default defineConfig({
   vite: {
     plugins: [tailwindcss()]
@@ -18,6 +13,14 @@ export default defineConfig({
   integrations: [preact()],
   adapter: cloudflare(),
   output: 'static',
+  fonts: [
+    {
+      provider: fontProviders.google(),
+      name: 'Comfortaa',
+      cssVariable: '--font-comfortaa',
+      styles: ["normal"]
+    }
+  ]
 
 
 });

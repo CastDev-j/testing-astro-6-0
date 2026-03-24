@@ -4,6 +4,7 @@ import Footer from "@components/shared/Footer.astro";
 import Header from "@components/shared/Header.astro";
 import "@styles/global.css";
 import { cn } from "@lib/cn";
+import { Font } from "astro:assets";
 
 interface Props {
   title?: string;
@@ -20,6 +21,7 @@ const { title } = Astro.props;
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="icon" href="/favicon.ico" />
     <meta name="generator" content={Astro.generator} />
+    <Font cssVariable="--font-comfortaa" preload />
     <title>{title || "Testing astro"}</title>
     <ClientRouter />
   </head>
