@@ -20,7 +20,15 @@ export default defineConfig({
       cssVariable: '--font-comfortaa',
       styles: ["normal"]
     }
-  ]
+  ],
+  markdown: {
+    shikiConfig: {
+      themes: {
+        light: 'slack-ochin',
+        dark: 'slack-dark'
+      }
+    }
+  }
 
 
 });

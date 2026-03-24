@@ -97,6 +97,7 @@ const { post } = Astro.props;
     color: #4b5563;
     margin-bottom: 1rem;
   }
+
   :global(.dark) .post-content :global(blockquote) {
     border-left: 4px solid #374151;
     color: #9ca3af;
@@ -110,6 +111,7 @@ const { post } = Astro.props;
     margin-bottom: 1rem;
     overflow-x: auto;
   }
+
   :global(.dark) .post-content :global(pre) {
     background: #1e293b;
     color: #f3f4f6;
@@ -135,6 +137,24 @@ const { post } = Astro.props;
     border-radius: 0;
     padding: 0;
     font-size: inherit;
+  }
+
+  :global(.astro-code) {
+    width: 100%;
+    font-size: 0.875rem;
+  }
+
+  :global(.dark .post-content .astro-code),
+  :global(.dark .post-content .astro-code span),
+  :global(.dark .post-content pre.astro-code),
+  :global(.dark .post-content pre.astro-code span) {
+    color: var(--shiki-dark) !important;
+    background: var(--shiki-dark-bg) !important;
+  }
+
+  :global(.dark .post-content pre.astro-code[style]) {
+    background: var(--shiki-dark-bg) !important;
+    color: var(--shiki-dark) !important;
   }
 
   .post-content :global(img) {
