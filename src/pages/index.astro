@@ -1,11 +1,10 @@
 ---
 export const prerender = false;
+import AstroGreet from "@components/home/AstroGreet.astro";
 import Greeting from "@components/home/Greeting";
 import Layout from "@layout/Layout.astro";
 
 const pageTitle = "Home";
-
-const dataMessage = "This is some data passed from the server.";
 
 const number = Astro.url.searchParams.get("number");
 const data = Astro.locals;
@@ -20,16 +19,14 @@ const data = Astro.locals;
       <div class="counter text-primary">00:00:00 AM</div>
       {number && <p>Number: {number}</p>}
       {data && <p>Data: {data.title}</p>}
-      <astro-greet data-message={dataMessage} class="flex gap-2 items-center">
-        <button>Say hi!</button>
-        <span class="hidden"></span>
-      </astro-greet>
 
       <button
         class="confetti bg-button-primary-bg text-button-primary-text px-4 py-2 rounded hover:bg-button-primary-bg-hover transition-colors"
       >
         Click Me
       </button>
+
+      <AstroGreet message="Welcome to my Astro site!" />
     </article>
   </section>
 
@@ -48,23 +45,6 @@ const data = Astro.locals;
     />
   </section>
 </Layout>
-
-<script>
-  class AstroGreet extends HTMLElement {
-    connectedCallback() {
-      const message = this.dataset.message;
-      const span = this.querySelector("span") as HTMLSpanElement;
-      const button = this.querySelector("button") as HTMLButtonElement;
-
-      button.addEventListener("click", () => {
-        span.classList.toggle("hidden");
-        span.innerHTML = message || "Hello!";
-      });
-    }
-  }
-
-  customElements.define("astro-greet", AstroGreet);
-</script>
 
 <script>
   import confetti from "canvas-confetti";

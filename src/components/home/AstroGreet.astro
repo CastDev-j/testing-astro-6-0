@@ -1,0 +1,29 @@
+---
+interface Props {
+  message: string;
+}
+
+const { message } = Astro.props;
+---
+
+<astro-greet data-message={message} class="flex gap-2 items-center">
+  <button>Say hi!</button>
+  <span class="hidden"></span>
+</astro-greet>
+
+<script>
+  class AstroGreet extends HTMLElement {
+    connectedCallback() {
+      const message = this.dataset.message;
+      const span = this.querySelector("span") as HTMLSpanElement;
+      const button = this.querySelector("button") as HTMLButtonElement;
+
+      button.addEventListener("click", () => {
+        span.classList.toggle("hidden");
+        span.innerHTML = message || "Hello!";
+      });
+    }
+  }
+
+  customElements.define("astro-greet", AstroGreet);
+</script>
