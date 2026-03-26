@@ -8,6 +8,7 @@ import { Font } from "astro:assets";
 
 interface Props {
   title?: string;
+  class?: string;
 }
 
 const { title } = Astro.props;
@@ -31,7 +32,12 @@ const { title } = Astro.props;
     )}
   >
     <Header />
-    <div class="min-h-48 flex flex-col items-start max-w-5xl w-full p-4">
+    <div
+      class={cn(
+        "min-h-48 flex flex-col items-start max-w-5xl w-full p-4",
+        Astro.props.class,
+      )}
+    >
       <slot />
     </div>
     <Footer />

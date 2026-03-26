@@ -2,18 +2,30 @@
 import HeroPost from "@components/blog/HeroPost.astro";
 import Layout from "./Layout.astro";
 import type { Post } from "@interfaces/post";
+import type { MarkdownHeading } from "astro";
+import SideBarPost from "@components/blog/SideBarPost.astro";
 
 interface Props {
   post: Post;
+  headings: MarkdownHeading[];
 }
 
-const { post } = Astro.props;
+const { post, headings } = Astro.props;
 ---
 
-<Layout title={post.title}>
-  <HeroPost {...post} />
-  <div class="post-content min-h-48 flex flex-col items-start max-w-5xl w-full">
-    <slot />
+<Layout title={post.title} class="max-w-6xl">
+  <div class="grid grid-cols-12 gap-4">
+    <div class="md:col-span-10 col-span-12">
+      <HeroPost {...post} />
+      <div
+        class="post-content min-h-48 flex flex-col items-start max-w-5xl w-full"
+      >
+        <slot />
+      </div>
+    </div>
+    <div class="col-span-2 hidden md:block mt-16">
+      <SideBarPost post={post} headings={headings} />
+    </div>
   </div>
 </Layout>
 

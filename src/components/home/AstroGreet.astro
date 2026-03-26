@@ -15,6 +15,7 @@ const { message } = Astro.props;
   class AstroGreet extends HTMLElement {
     connectedCallback() {
       const message = this.dataset.message;
+
       const span = this.querySelector("span") as HTMLSpanElement;
       const button = this.querySelector("button") as HTMLButtonElement;
 

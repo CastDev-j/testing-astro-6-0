@@ -1,0 +1,29 @@
+---
+import type { Post } from "@interfaces/post";
+import type { MarkdownHeading } from "astro";
+
+interface Props {
+  post: Post;
+  headings: MarkdownHeading[];
+}
+
+const { post, headings } = Astro.props;
+---
+
+<div class="sticky top-4">
+  <h2 class="text-lg font-semibold mb-4 text-text-primary">On this page</h2>
+  <ul class="flex flex-col gap-2">
+    {
+      headings.map((heading) => (
+        <li>
+          <a
+            href={`#${heading.slug}`}
+            class="text-sm text-text-tertiary hover:text-text-secondary-hover transition-colors"
+          >
+            {heading.text}
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+</div>

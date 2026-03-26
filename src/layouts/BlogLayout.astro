@@ -16,7 +16,7 @@ const pathname = Astro.url.pathname.split("/")[2] || "";
 const { title } = Astro.props;
 ---
 
-<Layout title={title}>
+<Layout title={title} class="max-w-6xl">
   <section class="w-full p-4 flex flex-col items-stretch justify-between">
     <article class="flex flex-wrap w-full gap-2">
       {
@@ -36,7 +36,7 @@ const { title } = Astro.props;
     </article>
   </section>
 
-  <div class="post-content min-h-48 flex flex-col items-start max-w-5xl w-full">
+  <div class="post-content min-h-48 flex flex-col items-start max-w-6xl w-full">
     <slot />
   </div>
 </Layout>
