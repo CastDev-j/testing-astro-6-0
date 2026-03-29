@@ -1,4 +1,5 @@
 ---
+slug: "my-twelfth-blog-post"
 title: My Twelfth Blog Post
 author: Astro Learner
 description: "A recap of what I learned while building this Astro blog."

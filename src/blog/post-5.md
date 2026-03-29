@@ -1,4 +1,5 @@
 ---
+slug: "my-fifth-blog-post"
 title: My Fifth Blog Post
 author: Astro Learner
 description: "I improved my content structure and made writing faster."

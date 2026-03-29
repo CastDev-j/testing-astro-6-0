@@ -1,4 +1,5 @@
 ---
+slug: "my-eighth-blog-post"
 title: My Eighth Blog Post
 author: Astro Learner
 description: "I started optimizing images for faster page loads."

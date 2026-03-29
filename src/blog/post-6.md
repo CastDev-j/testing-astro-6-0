@@ -1,4 +1,5 @@
 ---
+slug: "my-sixth-blog-post"
 title: My Sixth Blog Post
 author: Astro Learner
 description: "I experimented with reusable markdown components."

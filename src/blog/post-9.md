@@ -1,4 +1,5 @@
 ---
+slug: "my-ninth-blog-post"
 title: My Ninth Blog Post
 author: Astro Learner
 description: "I documented my publishing checklist to avoid mistakes."

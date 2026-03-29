@@ -1,4 +1,5 @@
 ---
+slug: "my-eleventh-blog-post"
 title: My Eleventh Blog Post
 author: Astro Learner
 description: "I added a simple related-posts strategy using tags."

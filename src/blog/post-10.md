@@ -1,4 +1,5 @@
 ---
+slug: "my-tenth-blog-post"
 title: My Tenth Blog Post
 author: Astro Learner
 description: "I improved typography to make long posts easier to read."
