@@ -1,10 +1,20 @@
 export const prerender = false;
 import type { APIRoute, GetStaticPaths } from "astro";
+import { actions } from "astro:actions";
 
 const userNames = ["Alice", "Bob", "Charlie", "David", "Eve"];
 
-export const GET = (async ({ params, request }) => {
-  console.log(request);
+export const GET = (async ({ params, request, callAction }) => {
+  const { data, error } = await callAction(actions.greeting.getGreeting, {
+    name: "John",
+    error: true,
+  });
+
+  if (error) {
+    console.log("Error from action:", error.message);
+  } else {
+    console.log("Data from action:", data);
+  }
 
   const id = params.id;
 
