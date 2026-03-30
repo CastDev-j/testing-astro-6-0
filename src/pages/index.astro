@@ -27,6 +27,12 @@ const data = Astro.locals;
       </button>
 
       <AstroGreet message="Welcome to my Astro site!" />
+
+      <button
+        class="action bg-button-primary-bg text-button-primary-text px-4 py-2 rounded hover:bg-button-primary-bg-hover transition-colors"
+      >
+        Run action
+      </button>
     </article>
   </section>
 
@@ -44,9 +50,26 @@ const data = Astro.locals;
       ]}
     />
   </section>
+
+  <section class="max-w-5xl w-full p-4 flex items-center justify-center">
+    <form class="action-form">
+      <label for="name">Name:</label>
+      <input type="text" id="name" name="name" />
+      <label for="email">Email:</label>
+      <input type="email" id="email" name="email" />
+      <button
+        type="submit"
+        class="bg-button-primary-bg text-button-primary-text px-4 py-2 rounded hover:bg-button-primary-bg-hover transition-colors"
+      >
+        Submit
+      </button>
+    </form>
+  </section>
 </Layout>
 
 <script>
+  import { actions, isInputError } from "astro:actions";
+  import { navigate } from "astro:transitions/client";
   import confetti from "canvas-confetti";
   let intervalId: NodeJS.Timeout | null = null;
 
@@ -68,15 +91,80 @@ const data = Astro.locals;
     }
   };
 
+  const runActionButton = () => {
+    const button = document.querySelector(".action") as HTMLButtonElement;
+
+    button.addEventListener("click", async () => {
+      button.disabled = true;
+      button.textContent = "Running...";
+
+      const { data, error } = await actions.greeting.getGreeting({
+        name: "Astro User",
+        error: true,
+      });
+
+      button.disabled = false;
+      button.textContent = "Run action";
+
+      if (error) {
+        alert(`Error: ${error.message} (Code: ${error.code})`);
+        return navigate("/blog");
+      } else {
+        alert(data);
+      }
+    });
+  };
+
   const loadConfettiButton = () => {
     const button = document.querySelector(".confetti") as HTMLButtonElement;
 
     button.addEventListener("click", () => confetti());
   };
 
+  const loadActionForm = () => {
+    const form = document.querySelector(".action-form") as HTMLFormElement;
+    const submitButton = form.querySelector(
+      'button[type="submit"]',
+    ) as HTMLButtonElement;
+
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      const formData = new FormData(form);
+
+      submitButton.disabled = true;
+      submitButton.textContent = "Submitting...";
+
+      const { data, error } = await actions.form.submitForm(formData);
+
+      submitButton.disabled = false;
+      submitButton.textContent = "Submit";
+
+      if (isInputError(error)) {
+        if (error.fields.name) {
+          const message = error.fields.name.join(", ");
+          alert(`Name Error: ${message}`);
+        }
+
+        if (error.fields.email) {
+          const message = error.fields.email.join(", ");
+          alert(`Email Error: ${message}`);
+        }
+      } else {
+        if (error) {
+          alert(`Error: ${error.message} (Code: ${error.code})`);
+        } else {
+          alert(data);
+        }
+      }
+    });
+  };
+
   document.addEventListener("astro:page-load", () => {
     loadClock();
     loadConfettiButton();
+    runActionButton();
+    loadActionForm();
   });
   document.addEventListener("astro:before-swap", cleanupClock);
 </script>
