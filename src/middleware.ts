@@ -1,5 +1,22 @@
+import { getActionContext } from "astro:actions";
 import { defineMiddleware, sequence } from "astro:middleware";
 import { env } from "cloudflare:workers";
+
+const blockNotAuthorizedRequest = defineMiddleware(async (context, next) => {
+  const { action } = getActionContext(context);
+
+  if (action?.calledFrom === "rpc") {
+    if (!context.cookies.has("user-session")) {
+      context.cookies.set("user-session", "1234567890");
+
+      return new Response("Forbidden", { status: 403 });
+    } else {
+      context.cookies.delete("user-session");
+    }
+  }
+
+  return next();
+});
 
 const rateLimit = defineMiddleware(async (context, next) => {
   const { success } = await env.MY_RATE_LIMITER.limit({
@@ -26,6 +43,7 @@ const modifyHtml = defineMiddleware(async (context, next) => {
 
 const setTitle = defineMiddleware(async (context, next) => {
   context.locals.title = "Hello from middleware!";
+  context.locals.otherValue = 10;
   return next();
 });
 
@@ -42,6 +60,7 @@ const setRewriting = defineMiddleware(async (context, next) => {
 
 export const onRequest = sequence(
   rateLimit,
+  blockNotAuthorizedRequest,
   setRewriting,
   setTitle,
   modifyHtml,
