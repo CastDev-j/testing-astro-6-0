@@ -1,5 +1,5 @@
 // @ts-check
-import { defineConfig, fontProviders } from 'astro/config';
+import { defineConfig, fontProviders, passthroughImageService } from 'astro/config';
 import tailwindcss from '@tailwindcss/vite';
 import cloudflare from '@astrojs/cloudflare';
 import preact from '@astrojs/preact';
@@ -23,6 +23,9 @@ export default defineConfig({
       styles: ["normal"]
     }
   ],
+  image: {
+    service: passthroughImageService(),
+  },
   markdown: {
     shikiConfig: {
       themes: {
