@@ -7,7 +7,7 @@ export const greeting = {
       name: z.string(),
       error: z.boolean().optional(),
     }),
-    handler: async (input) => {
+    handler: async (input, context) => {
       await new Promise((resolve) => setTimeout(resolve, 1000));
 
       if (input.error) {
@@ -17,7 +17,12 @@ export const greeting = {
         });
       }
 
-      return `Hello, ${input.name}!`;
+      const randomNumber = await context.session?.get("randomNumber");
+      if (randomNumber) {
+        return `Hello, ${input.name}! Your random number is ${randomNumber}.`;
+      }
+
+      return `Hello, ${input.name}! `;
     },
   }),
 };

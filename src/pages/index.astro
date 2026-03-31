@@ -15,6 +15,8 @@ const result = Astro.getActionResult(actions.form.submitForm);
 if (result && !result.error) {
   return Astro.redirect(`/route/form-submited-successfully`);
 }
+
+const randomNumber = await Astro.session?.get("randomNumber");
 ---
 
 <Layout title={pageTitle}>
@@ -25,6 +27,8 @@ if (result && !result.error) {
       </h1>
       <div class="counter text-primary">00:00:00 AM</div>
       {number && <p>Number: {number}</p>}
+      {randomNumber && <p>Random Number: {randomNumber}</p>}
+
       {
         data && (
           <p>
@@ -128,7 +132,7 @@ if (result && !result.error) {
 
       const { data, error } = await actions.greeting.getGreeting({
         name: "Astro User",
-        error: true,
+        error: false,
       });
 
       button.disabled = false;

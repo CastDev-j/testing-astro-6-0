@@ -4,4 +4,7 @@ declare namespace App {
     title: string;
     otherValue: number;
   }
+  interface SessionData {
+    randomNumber: number;
+  }
 }

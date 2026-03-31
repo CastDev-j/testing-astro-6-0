@@ -9,7 +9,10 @@ const blockNotAuthorizedRequest = defineMiddleware(async (context, next) => {
     if (!context.cookies.has("user-session")) {
       context.cookies.set("user-session", "1234567890");
 
-      return new Response("Forbidden", { status: 403 });
+      return new Response(
+        "This error happens 1 of 2 times an action is called",
+        { status: 403 },
+      );
     } else {
       context.cookies.delete("user-session");
     }
